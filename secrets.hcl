@@ -1,1 +1,11 @@
 token: lifzzfckdftufcut795658fuf6
+
+name:
+  first_name: zakaria
+  secret: my-password
+  pass: 9Kf7Bq2mXxYw8PzLrT6NcVjA4HsEeQ
+  token: ghp_1234567890abcdefghijklmnopqrstuvwxyz
+  mot_de_passe: 1234
+  passwort: 1234
+  password: 1234
+  
