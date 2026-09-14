@@ -1,0 +1,35 @@
+title = "Projektweite Betterleaks Konfiguration"
+
+# 1. Standard-Regeln von Betterleaks übernehmen
+[extend]
+useDefault = true
+# Optional: Standard-Regeln deaktivieren, die zu viele Fehlalarme erzeugen
+# disabledRules = ["generic-api-key"]
+
+# 2. Eigene firmen- / projektspezifische Token-Regeln hinzufügen
+[[rules]]
+id = "myorg-api-token"
+description = "Erkennt interne API-Tokens unserer Organisation"
+regex = '''MYORG_[A-Za-z0-9]{32}'''
+keywords = ["MYORG_"]
+
+[[rules]]
+id = "custom-service-key"
+description = "Erkennt interne Service-Keys"
+regex = '''srv_key_[0-9a-f]{40}'''
+keywords = ["srv_key_"]
+
+# 3. Globale Allowlist / Ausnahmen (z. B. Testdaten & Mocks ignorieren)
+[allowlist]
+description = "Globale Ausnahmen für Test- und Fixture-Dateien"
+paths = [
+    '''(^|/)tests/fixtures/''',
+    '''(^|/)testdata/''',
+    '''(^|/)__mocks__/'''
+]
+# Begriffe, die in Beispiel-/Testdateien ignoriert werden dürfen:
+stopwords = [
+    "dummy_token",
+    "example_secret",
+    "test_api_key"
+]
