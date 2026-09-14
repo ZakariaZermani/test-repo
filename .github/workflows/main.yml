@@ -1,21 +1,22 @@
-name: Secret Scan
+name: secret-scan
+
 on: [push, pull_request]
 
 jobs:
-  betterleaks-scan:
+  betterleaks:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout Code
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      # Offizielles Binary direkt von Betterleaks Release herunterladen
       - name: Install Betterleaks
         run: |
-          BETTERLEAKS_VERSION="1.1.1" # Gewünschte Version fixieren
-          curl -sSL "https://github.com/betterleaks/betterleaks/releases/download/v${BETTERLEAKS_VERSION}/betterleaks-linux-amd64.tar.gz" | tar -xz
+          BETTERLEAKS_VERSION="1.1.1"
+          curl -sSfL "https://github.com/betterleaks/betterleaks/releases/download/v${BETTERLEAKS_VERSION}/betterleaks_${BETTERLEAKS_VERSION}_linux_x64.tar.gz" | tar -xz
           sudo mv betterleaks /usr/local/bin/
 
-      - name: Run Betterleaks
+      - name: Run Betterleaks Scan
         run: |
-          betterleaks dir --verbose .
+          betterleaks git . -v
