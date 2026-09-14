@@ -1,4 +1,4 @@
-name: secret-scan
+name: secret scan with betterleaks
 
 on: [push, pull_request]
 
@@ -6,17 +6,17 @@ jobs:
   betterleaks:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Code
+      - name: Checkout Repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Install Betterleaks
+      - name: Install Betterleaks v1.8.1
         run: |
-          BETTERLEAKS_VERSION="1.1.1"
+          BETTERLEAKS_VERSION="1.8.1"
           curl -sSfL "https://github.com/betterleaks/betterleaks/releases/download/v${BETTERLEAKS_VERSION}/betterleaks_${BETTERLEAKS_VERSION}_linux_x64.tar.gz" | tar -xz
           sudo mv betterleaks /usr/local/bin/
 
-      - name: Run Betterleaks Scan
+      - name: Run Betterleaks
         run: |
           betterleaks git . -v
